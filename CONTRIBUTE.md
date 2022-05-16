@@ -1,16 +1,21 @@
-# Contribute
+# Contributing
 
-This documentation is still WIP.
+# Local Setup for Development
 
-# Local setup for development
+To get started, install at least Python 3.8 and do the following:
 
-Clone and create a virtual environment (For details [Python Docs - venv](https://docs.python.org/3/tutorial/venv.html))
+## Linux / Mac OS
 
 ``` bash
 git clone https://github.com/CSalih/dstack
-virtualenv venv
+python3 -m venv venv
+venv/bin/pip install --editable ".[dev]"
 source venv/bin/activate
-pip install --editable .
+dstack --version
 ```
 
-The cli is now available, try `dstack --version`.
+This will install all required dependencies and create an "editable" virtual
+environment ([virtualenv](https://docs.python.org/3/tutorial/venv.html)).
+Editable means that any changes to the source code will be imminently reflected to the virtualenv.
+
+## Code Style
