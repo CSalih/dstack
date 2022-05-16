@@ -1,4 +1,5 @@
 import click
+from click import Context
 
 from dstack.command.docker import ssh, start, stop
 
@@ -7,7 +8,7 @@ from dstack.command.docker import ssh, start, stop
 @click.version_option()
 @click.option('-v', '--verbose', is_flag=True, help='Enables verbose mode', default=False)
 @click.pass_context
-def main(ctx, verbose: bool):
+def main(ctx: Context, verbose: bool):
     """
     A cli tool to manage your local stack.
     """
