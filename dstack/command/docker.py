@@ -10,9 +10,13 @@ def is_verbose():
     return click.get_current_context().obj['verbose']
 
 
-def docker_compose(args: str):
+def log(message: str, level='debug'):
     if is_verbose():
-        click.echo(f'docker-compose {args}')
+        click.secho(f'[{level.upper()}]: {message}', bg='blue', fg='white')
+
+
+def docker_compose(args: str):
+    log(f'docker-compose {args}')
     os.system(f'docker-compose -p "{DOCKER_PROJECT_NAME}" -f "{DOCKER_COMPOSE_FILE_PATH}" {args}')
 
 
@@ -22,6 +26,7 @@ def ssh():
     docker_client = docker.from_env()
     is_running = docker_client.api.containers(filters={"status": "running", "name": "ez_cli"})
     if not is_running:
+        log(f'Stack is not running. Try to start the stack ...')
         docker_compose('start')
 
     # TODO: workdir should allowed only when the directory is mapped as volume
