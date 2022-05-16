@@ -19,3 +19,12 @@ environment ([virtualenv](https://docs.python.org/3/tutorial/venv.html)).
 Editable means that any changes to the source code will be imminently reflected to the virtualenv.
 
 ## Code Style
+
+`pre-commit` will help us to keep a consistent code style, for that you need to install the hooks.
+
+``` bash
+pre-commit install
+```
+
+That's it! Checks will run before a commit and issues will either be fixed
+automatically or you will get an error message.
