@@ -1,4 +1,9 @@
 # Author: https://rednafi.github.io/digressions/python/2020/04/06/python-precommit.html
+
+default_language_version:
+  python: python3.8
+
+
 repos:
   # isort
   - repo: https://github.com/asottile/seed-isort-config
@@ -30,15 +35,13 @@ repos:
             buck-out|
             build|
             dist"""
-        language_version: python3.8
-
 
   # flake8
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
       - id: flake8
-        args: # arguments to configure flake8
+        args:
           # making isort line length compatible with black
           - "--max-line-length=88"
           - "--max-complexity=18"
