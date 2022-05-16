@@ -4,12 +4,11 @@ A cli tool to manage your local stack.
 
 ## Install
 
-Each time you want to use `trt` you have to `source`.
+To install the cli as executable type following:
 
 ``` bash
 git clone https://github.com/CSalih/dstack
-cd dstack
-pip install --user .
+pip install --user dstack
 ```
 
 ## Usage
