@@ -16,6 +16,9 @@ setup(
         "Operating System :: OS Independent",
         'Programming Language :: Python :: 3.8',
     ],
+    install_requires=[
+        'Click',
+    ],
     entry_points={
         "console_scripts": [
             "dstack = dstack.command:main",
