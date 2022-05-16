@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='dstack',
-    version='0.1.0',
+    version='0.1.1',
     description='A cli tool to manage your local stack',
     author='CSalih (Salih Candir)',
     url='https://github.com/CSalih/dstack',
