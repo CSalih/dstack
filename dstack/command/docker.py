@@ -5,14 +5,15 @@ from dstack.utils.docker_compose import docker_compose
 from dstack.utils.logger import debug
 
 
+def is_stack_running() -> bool:
+    docker_client = docker.from_env()
+    return docker_client.api.containers(filters={"status": "running", "name": "ez_cli"})
+
+
 @click.command()
 def ssh():
     """SSH into the docker stack."""
-    docker_client = docker.from_env()
-    is_running = docker_client.api.containers(
-        filters={"status": "running", "name": "ez_cli"}
-    )
-    if not is_running:
+    if not is_stack_running():
         debug("Stack is not running. Try to start the stack ...")
         docker_compose("start")
 
