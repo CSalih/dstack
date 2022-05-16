@@ -8,7 +8,8 @@ Each time you want to use `trt` you have to `source`.
 
 ``` bash
 git clone https://github.com/CSalih/dstack
-pip install .
+cd dstack
+pip install --user .
 ```
 
 ## Usage
