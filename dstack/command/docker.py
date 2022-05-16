@@ -20,8 +20,9 @@ def ssh():
         docker_compose('start')
 
     # TODO: workdir should allowed only when the directory is mapped as volume
-    workdir = f"/{os.path.basename(os.getcwd())}"
-    docker_compose(f'exec --workdir="/var/www{workdir}" --user site cli bash')
+    # workdir = f"/{os.path.basename(os.getcwd())}"
+    # docker_compose(f'exec --workdir="/var/www{workdir}" --user site cli bash')
+    docker_compose('exec --user site cli bash')
 
 
 @click.command()
