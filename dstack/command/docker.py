@@ -6,13 +6,15 @@ import docker
 from dstack import DOCKER_PROJECT_NAME, DOCKER_COMPOSE_FILE_PATH
 
 
-def docker_compose(args: str):
-    click.echo(f'docker-compose {args}')
+def docker_compose(ctx, args: str):
+    if ctx['verbose']:
+        click.echo(f'docker-compose {args}')
     os.system(f'docker-compose -p "{DOCKER_PROJECT_NAME}" -f "{DOCKER_COMPOSE_FILE_PATH}" {args}')
 
 
 @click.command()
-def ssh():
+@click.pass_obj
+def ssh(ctx):
     """SSH into the docker stack."""
     docker_client = docker.from_env()
     is_running = docker_client.api.containers(filters={"status": "running", "name": "ez_cli"})
@@ -22,16 +24,18 @@ def ssh():
     # TODO: workdir should allowed only when the directory is mapped as volume
     # workdir = f"/{os.path.basename(os.getcwd())}"
     # docker_compose(f'exec --workdir="/var/www{workdir}" --user site cli bash')
-    docker_compose('exec --user site cli bash')
+    docker_compose(ctx, 'exec --user site cli bash')
 
 
 @click.command()
-def start():
+@click.pass_obj
+def start(ctx):
     """Start the docker stack."""
-    docker_compose('start')
+    docker_compose(ctx, 'start')
 
 
 @click.command()
-def stop():
+@click.pass_obj
+def stop(ctx):
     """Stop the docker stack."""
-    docker_compose('stop')
+    docker_compose(ctx, 'stop')

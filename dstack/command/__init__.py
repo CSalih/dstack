@@ -5,7 +5,13 @@ from dstack.command.docker import ssh, start, stop
 
 @click.group()
 @click.version_option()
-def main():
+@click.option('-v', '--verbose', is_flag=True, help='Enables verbose mode', default=False)
+@click.pass_context
+def main(ctx, verbose: bool):
+    ctx.obj = {
+        "verbose": verbose
+    }
+
     """dstack: wip"""
     pass
 
