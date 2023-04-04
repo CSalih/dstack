@@ -1,7 +1,14 @@
+import os
+
 import click
 from click import Context
+from dotenv import load_dotenv
 
-from dstack.command.docker import ssh, start, stop
+from dstack.command import docker
+from dstack.command import warden
+
+load_dotenv("{}/.env".format(os.getcwd()))
+is_warden = os.getenv('WARDEN_ENV_NAME') is not None
 
 
 @click.group(invoke_without_command=True)
@@ -17,11 +24,16 @@ def main(ctx: Context, verbose: bool):
     ctx.obj = {"verbose": verbose}
 
     if ctx.invoked_subcommand is None:
-        ctx.invoke(ssh)
+        ctx.invoke(docker.ssh)
 
     pass
 
 
-main.add_command(start)
-main.add_command(stop)
-main.add_command(ssh)
+if is_warden:
+    main.add_command(warden.ssh)
+    main.add_command(warden.start)
+    main.add_command(warden.stop)
+else:
+    main.add_command(docker.start)
+    main.add_command(docker.stop)
+    main.add_command(docker.ssh)
