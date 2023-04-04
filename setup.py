@@ -25,6 +25,7 @@ setup(
     install_requires=[
         "click==8.1.3",
         "docker==5.0.3",
+        "python-dotenv==1.0.0",
     ],
     extras_require={
         "dev": [
